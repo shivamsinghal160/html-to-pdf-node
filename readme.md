@@ -52,7 +52,7 @@ This project streamlines PDF creation and management within your applications. K
 - **Programming Language**: JavaScript
 - **Package Manager**: npm
 
-## environment variables
+## Environment Variables (.env)
 - **PORT**: The port on which the server will run (default: 3000).
 - **AUTH_TOKEN**: A token for authorizing requests (default: my-secret-token).
 
@@ -85,7 +85,9 @@ node index.js
 {
   "html": "<h1>Hello, World!</h1>"
 }
+
 ------------- OR -------------
+
 {
   "url": "https://example.com"
 }
