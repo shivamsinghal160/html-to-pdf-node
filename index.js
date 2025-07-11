@@ -49,14 +49,14 @@ app.post("/generate-pdf", async (req, res) => {
   }
 });
 
-app.delete("/delete-files", (req, res) => {
-  const { namePart } = req.body;
-  if (!namePart) {
+app.delete("/delete-pdf", (req, res) => {
+  const { fileName } = req.body;
+  if (!fileName) {
     return res.status(400).send("Name part is required.");
   }
-  deleteFilesByPartialName("./public/pdfs", namePart);
+  deleteFilesByPartialName("./public/pdfs", fileName);
   res.status(200).json({
-    message: `Files containing "${namePart}" in our directories are being deleted.`,
+    message: `Files containing "${fileName}" in our directories are being deleted.`,
   });
 });
 
