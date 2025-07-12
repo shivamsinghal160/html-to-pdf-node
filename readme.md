@@ -76,7 +76,7 @@ node index.js
 ```
 # API Endpoints
 - POST /generate-pdf: Convert HTML to PDF with body content.
-- POST /delete-pdf: Delete a specified pdf.
+- DELETE /delete-pdf: Delete a specified pdf.
 
 
 ## Body Content Example for POST /generate-pdf
@@ -92,7 +92,7 @@ node index.js
   "url": "https://example.com"
 }
 ```
-## Body Content Example for POST /delete-pdf
+## Body Content Example for DELETE /delete-pdf
 
 ```json
 {
