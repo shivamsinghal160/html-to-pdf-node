@@ -18,7 +18,6 @@ createFileFolder = (filePath, type = "file") => {
             }
           });
         } else {
-          console.log(`Directory already exists: ${filePath}`);
           resolve();
         }
       } else {
@@ -34,7 +33,6 @@ createFileFolder = (filePath, type = "file") => {
             }
           });
         } else {
-          console.log(`File already exists: ${filePath}`);
           resolve();
         }
       }
