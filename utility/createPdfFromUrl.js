@@ -2,8 +2,9 @@ const uuid = require("uuid");
 const puppeteer = require("puppeteer");
 const path = require("path");
 const createFileFolder = require("./createFileFolder.js");
+const autoDeleteGeneratedPdf = require("./autoDeleteGeneratedPdf.js");
 
-const createPdf = async (htmlContent) => {
+const createPdf = async (htmlContent, autoDelete) => {
   try {
     if (!htmlContent) {
       throw new Error("HTML content is required to generate PDF.");
@@ -15,8 +16,9 @@ const createPdf = async (htmlContent) => {
     await page.setContent(htmlContent, {
       waitUntil: "networkidle0",
     });
-
-    let tempName = `${uuid.v4()}.pdf`;
+    let uniqId = uuid.v4();
+    console.log(`Generating PDF with UUID: ${uniqId}`);
+    let tempName = `${uniqId}.pdf`;
     let filePath = `../public/pdfs`;
 
     // Ensure the directory exists
@@ -28,7 +30,14 @@ const createPdf = async (htmlContent) => {
     await page.pdf({ path: `${filePath}/${tempName}`, format: "A4" });
 
     await browser.close();
+
+    if (autoDelete) {
+      // auto delete the generated PDF after 1 minute
+      autoDeleteGeneratedPdf(`${filePath}`, uniqId, 1);
+    }
+
     return {
+      uuid: uniqId,
       message: "PDF generated successfully!",
       fileName: tempName,
     };

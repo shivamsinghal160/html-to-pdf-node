@@ -1,6 +1,6 @@
 # HTML-TO-PDF-NODE
 
-*Transform HTML into Perfect PDFs Instantly*
+_Transform HTML into Perfect PDFs Instantly_
 
 ![last-commit](https://img.shields.io/github/last-commit/shivamsinghal160/html-to-pdf-node?style=flat&logo=git&logoColor=white&color=0080ff)
 ![repo-top-language](https://img.shields.io/github/languages/top/shivamsinghal160/html-to-pdf-node?style=flat&color=0080ff)
@@ -42,6 +42,7 @@ This project streamlines PDF creation and management within your applications. K
 - 🧹 **File Cleanup Utility**: Automates deletion of temporary or redundant files to keep your storage organized.
 - 🔑 **Secure Request Handling**: Manages authorization and cross-origin requests seamlessly.
 - 📁 **Custom PDF Generation**: Converts HTML snippets into downloadable documents, supporting flexible workflows.
+- 🗑️ **Auto-Delete Feature**: Automatically removes generated PDFs after a specified time, ensuring efficient storage management.
 
 ---
 
@@ -53,6 +54,7 @@ This project streamlines PDF creation and management within your applications. K
 - **Package Manager**: npm
 
 ## Environment Variables (.env)
+
 - **PORT**: The port on which the server will run (default: 3000).
 - **AUTH_TOKEN**: A token for authorizing requests (default: my-secret-token).
 
@@ -74,10 +76,11 @@ npm install
 node index.js
 
 ```
+
 # API Endpoints
+
 - POST /generate-pdf: Convert HTML to PDF with body content.
 - DELETE /delete-pdf: Delete a specified pdf.
-
 
 ## Body Content Example for POST /generate-pdf
 
@@ -91,10 +94,19 @@ node index.js
 {
   "url": "https://example.com"
 }
+
+# For Stopping Auto Delete
+{
+  "html": "<h1>Hello, World!</h1>",
+  "autoDelete": false
+}
+
 ```
+
 ## Body Content Example for DELETE /delete-pdf
 
 ```json
 {
   "uuid": "example"
 }
+```

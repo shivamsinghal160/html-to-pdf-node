@@ -10,6 +10,11 @@ function deleteFilesByPartialName(directoryPath, namePart) {
 
     files.forEach((file) => {
       const filePath = path.join(directoryPath, file);
+      // Skip if it's not existing file
+      if (!fs.existsSync(filePath)) {
+        console.log(`File ${file} does not exist, skipping deletion.`);
+        return;
+      }
 
       // Check if the filename includes the specified part
       if (file.includes(namePart)) {

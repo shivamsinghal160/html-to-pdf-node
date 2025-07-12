@@ -29,6 +29,7 @@ app.use((req, res, next) => {
 app.post("/generate-pdf", async (req, res) => {
   try {
     let htmlContent = req.body.html ?? "";
+    let autoDelete = req.body.autoDelete ?? true;
     if (htmlContent == "") {
       const url = req.body.url;
       if (!url) {
@@ -36,9 +37,9 @@ app.post("/generate-pdf", async (req, res) => {
       }
       htmlContent = await downloadHtmlContent(url);
     }
-    const pdfResponse = await createPdf(htmlContent);
+    const pdfResponse = await createPdf(htmlContent, autoDelete);
     res.status(200).json({
-      uuid: pdfResponse.fileName,
+      uuid: pdfResponse.uuid,
       message: pdfResponse.message,
       file: `${process.env.GLOBAL_URL}/pdfs/${pdfResponse.fileName}`,
     });
