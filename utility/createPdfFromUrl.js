@@ -1,5 +1,7 @@
 const uuid = require("uuid");
 const puppeteer = require("puppeteer");
+const path = require("path");
+const createFileFolder = require("./createFileFolder.js");
 
 const createPdf = async (htmlContent) => {
   try {
@@ -15,9 +17,15 @@ const createPdf = async (htmlContent) => {
     });
 
     let tempName = `${uuid.v4()}.pdf`;
-    let filePath = `./public/pdfs/${tempName}`;
+    let filePath = `../public/pdfs`;
+
+    // Ensure the directory exists
+    await createFileFolder(filePath, "folder");
+
+    filePath = path.resolve(__dirname, filePath);
+
     // Generate PDF
-    await page.pdf({ path: filePath, format: "A4" });
+    await page.pdf({ path: `${filePath}/${tempName}`, format: "A4" });
 
     await browser.close();
     return {

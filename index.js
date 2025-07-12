@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const downloadHtmlContent = require("./utility/downloadHtmlContent.js");
@@ -37,8 +38,9 @@ app.post("/generate-pdf", async (req, res) => {
     }
     const pdfResponse = await createPdf(htmlContent);
     res.status(200).json({
+      uuid: pdfResponse.fileName,
       message: pdfResponse.message,
-      fileName: pdfResponse.fileName,
+      file: `${process.env.GLOBAL_URL}/pdfs/${pdfResponse.fileName}`,
     });
   } catch (error) {
     console.error("Error generating PDF:", error);
@@ -50,13 +52,13 @@ app.post("/generate-pdf", async (req, res) => {
 });
 
 app.delete("/delete-pdf", (req, res) => {
-  const { fileName } = req.body;
-  if (!fileName) {
+  const { uuid } = req.body;
+  if (!uuid) {
     return res.status(400).send("Name part is required.");
   }
-  deleteFilesByPartialName("./public/pdfs", fileName);
+  deleteFilesByPartialName("./public/pdfs", uuid);
   res.status(200).json({
-    message: `Files containing "${fileName}" in our directories are being deleted.`,
+    message: `Files containing "${uuid}" in our directories are being deleted.`,
   });
 });
 

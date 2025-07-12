@@ -62,7 +62,7 @@ Build the project from source and install the dependencies:
 
 ```bash
 # Clone the repository
-git clone https://github.com/shivamsinghal160/html-to-pdf-node
+git clone https://github.com/shivamsinghal160/html-to-pdf-node.git
 
 # Navigate to the project directory
 cd html-to-pdf-node
@@ -96,5 +96,5 @@ node index.js
 
 ```json
 {
-  "fileName": "example"
+  "uuid": "example"
 }
