@@ -10,7 +10,7 @@ const createPdf = async (htmlContent, autoDelete) => {
       throw new Error("HTML content is required to generate PDF.");
     }
     const browser = await puppeteer.launch({
-      userDataDir: "C:/puppeteer-temp",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
 
